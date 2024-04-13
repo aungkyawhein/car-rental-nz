@@ -42,7 +42,7 @@ function App() {
   const calcPrice = (perHr: number, perKm: number) => {
     const hr = (data.hr > 6) ? 6 : data.hr
     const price = (perHr * hr) + (perKm * data.km)
-    return price.toFixed(2)
+    return Number(price.toFixed(2))
   }
 
   const List = () => {
