@@ -77,6 +77,10 @@ table {
     text-align: left;
     background-color: white;
   }
+
+  tr.highlight td {
+    color: crimson;
+  }
 }
 @media (prefers-color-scheme: dark) {
   table {

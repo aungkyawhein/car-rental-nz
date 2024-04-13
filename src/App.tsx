@@ -60,49 +60,6 @@ function App() {
     })
   }, [data])
 
-  const List = () => {
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Car</th>
-            <th>Hourly Rate</th>
-            <th>Daily Rate (+6 hrs)</th>
-            <th>Distance Rate (per km)</th>
-            <th>Total Price</th>
-          </tr>
-        </thead>
-        <tbody>
-        {
-          cars.map((car) => {
-            return (
-              <tr key={car.name}>
-                <td>{car.name}</td>
-                <td>
-                  <span className={daily ? 'disabled' : 'active'}>
-                    $ {car.perHr}
-                  </span>
-                </td>
-                <td>
-                  <span className={daily ? 'active' : 'disabled'}>
-                    $ {car.perDay}
-                  </span>
-                </td>
-                <td>$ {car.perKm}</td>
-                <td>
-                  <span>
-                    $ {car.price}
-                  </span>
-                </td>
-              </tr>
-            )
-          })
-        }
-        </tbody>
-      </table>
-    )
-  }
-
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
     const { name, value } = e.currentTarget
     setData((oldData) => (
@@ -121,9 +78,64 @@ function App() {
         <p><input type='number' id='km' name='km' onChange={handleChange} /> km</p>
         <p><input type='number' id='hr' name='hr' onChange={handleChange} /> hr</p>
         {daily && <p><small>More than 6 hrs is 1 day.</small></p>}
-        <List />
+        <CarsList cars={cars} daily={daily} />
       </div>
     </>
+  )
+}
+
+function CarsList({cars, daily}) {
+  const [lowestIndex, setLowestIndex] = useState(0)
+
+  useEffect(() => {
+    setLowestIndex(() => {
+      const car = cars.reduce((accumulator, currentValue) =>
+        currentValue.price < accumulator.price ? currentValue : accumulator
+      )
+      const carIndex = cars.indexOf(car)
+      return carIndex
+    })
+  }, [cars, lowestIndex])
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Car</th>
+          <th>Hourly Rate</th>
+          <th>Daily Rate (+6 hrs)</th>
+          <th>Distance Rate (per km)</th>
+          <th>Total Price</th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+        cars.map((car, i) => {
+          return (
+            <tr key={i} className={lowestIndex === i ? 'highlight' : ''}>
+              <td>{car.name}</td>
+              <td>
+                <span className={daily ? 'disabled' : 'active'}>
+                  $ {car.perHr}
+                </span>
+              </td>
+              <td>
+                <span className={daily ? 'active' : 'disabled'}>
+                  $ {car.perDay}
+                </span>
+              </td>
+              <td>$ {car.perKm}</td>
+              <td>
+                <span>
+                  $ {car.price}
+                </span>
+              </td>
+            </tr>
+          )
+        })
+      }
+      </tbody>
+    </table>
   )
 }
 
