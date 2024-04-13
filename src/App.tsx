@@ -70,8 +70,12 @@ function App() {
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
     const { name, value } = e.currentTarget
+    let val = +value
+    if (name === 'hr' && val > 24) {
+      val = 24
+    }
     setData((oldData) => (
-      { ...oldData, [name]: value }
+      { ...oldData, [name]: val }
     ))
   }
 
@@ -83,8 +87,8 @@ function App() {
       <div className='content'>
         <h1>Car rental price</h1>
         <p>Price comparison for car rental (currently CityHop) based on distance and duration.</p>
-        <p><input type='number' id='km' name='km' onChange={handleChange} /> km</p>
-        <p><input type='number' id='hr' name='hr' onChange={handleChange} /> hr</p>
+        <p><input type='number' id='km' name='km' onChange={handleChange} value={Number(data.km).toString()} min={0} /> km</p>
+        <p><input type='number' id='hr' name='hr' onChange={handleChange} value={Number(data.hr).toString()} min={0} /> hr</p>
         {daily && <p><small>More than 6 hrs is 1 day.</small></p>}
         <CarsList cars={cars} daily={daily} />
       </div>
