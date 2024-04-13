@@ -66,3 +66,24 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+table {
+  margin: 0 auto;
+  background-color: gray;
+  border-spacing: 1px;
+
+  td, th {
+    padding: 0.5rem 1rem;
+    text-align: left;
+    background-color: white;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+input {
+  padding: 0.5rem 1rem;
+  border: 1px solid gray;
+}
