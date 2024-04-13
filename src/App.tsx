@@ -34,16 +34,31 @@ function App() {
       perDay: 120
     },
   ]
-
-  useEffect(() => {
-    toggleDaily(data.hr > 6)
-  }, [data])
-
   const calcPrice = (perHr: number, perKm: number) => {
     const hr = (data.hr > 6) ? 6 : data.hr
     const price = (perHr * hr) + (perKm * data.km)
     return Number(price.toFixed(2))
   }
+  const [cars, updateCars] = useState(
+    cityhop.map((car) => {
+      return {
+        ...car,
+        price: calcPrice(car.perHr, car.perKm)
+      }
+    })
+  )
+
+  useEffect(() => {
+    toggleDaily(data.hr > 6)
+    updateCars((cars) => {
+      return cars.map((car) => {
+        return {
+          ...car,
+          price: calcPrice(car.perHr, car.perKm)
+        }
+      })
+    })
+  }, [data])
 
   const List = () => {
     return (
@@ -59,7 +74,7 @@ function App() {
         </thead>
         <tbody>
         {
-          cityhop.map((car) => {
+          cars.map((car) => {
             return (
               <tr key={car.name}>
                 <td>{car.name}</td>
@@ -76,7 +91,7 @@ function App() {
                 <td>$ {car.perKm}</td>
                 <td>
                   <span>
-                    $ {calcPrice(car.perHr, car.perKm)}
+                    $ {car.price}
                   </span>
                 </td>
               </tr>
