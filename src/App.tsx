@@ -2,6 +2,14 @@ import React, { useEffect, useState } from 'react'
 import './App.css'
 import logo from './assets/logo.png'
 
+export interface CarModel {
+  name: string,
+  perHr: number,
+  perKm: number,
+  perDay: number,
+  price: number
+}
+
 function App() {
   const [data, setData] = useState({
     km: 0,
@@ -51,7 +59,7 @@ function App() {
   useEffect(() => {
     toggleDaily(data.hr > 6)
     updateCars((cars) => {
-      return cars.map((car) => {
+      return cars.map((car: CarModel) => {
         return {
           ...car,
           price: calcPrice(car.perHr, car.perKm)
@@ -84,12 +92,13 @@ function App() {
   )
 }
 
-function CarsList({cars, daily}) {
+function CarsList(props: {cars: Array<CarModel>, daily: boolean}) {
+  const {cars, daily} = props
   const [lowestIndex, setLowestIndex] = useState(0)
 
   useEffect(() => {
     setLowestIndex(() => {
-      const car = cars.reduce((accumulator, currentValue) =>
+      const car = cars.reduce((accumulator: CarModel, currentValue: CarModel) =>
         currentValue.price < accumulator.price ? currentValue : accumulator
       )
       const carIndex = cars.indexOf(car)
