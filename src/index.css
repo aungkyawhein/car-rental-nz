@@ -78,6 +78,13 @@ table {
     background-color: white;
   }
 }
+@media (prefers-color-scheme: dark) {
+  table {
+    td, th {
+      background-color: #1a1a1a;
+    }
+  }
+}
 
 .disabled {
   opacity: 0.5;
