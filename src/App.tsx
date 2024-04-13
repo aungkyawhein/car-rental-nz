@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './App.css'
+import logo from './assets/logo.png'
 
 function App() {
   const [data, setData] = useState({
@@ -96,12 +97,17 @@ function App() {
 
   return (
     <>
-      <h1>Car rental price</h1>
-      <p>Price comparison for car rental (currently CityHop) based on distance and duration.</p>
-      <p><input type='number' id='km' name='km' onChange={handleChange} /> km</p>
-      <p><input type='number' id='hr' name='hr' onChange={handleChange} /> hr</p>
-      {daily && <p><small>More than 6 hrs is 1 day.</small></p>}
-      <List />
+      <div className='background'>
+        <img className='logo' src={logo} width={100} height={100} />
+      </div>
+      <div className='content'>
+        <h1>Car rental price</h1>
+        <p>Price comparison for car rental (currently CityHop) based on distance and duration.</p>
+        <p><input type='number' id='km' name='km' onChange={handleChange} /> km</p>
+        <p><input type='number' id='hr' name='hr' onChange={handleChange} /> hr</p>
+        {daily && <p><small>More than 6 hrs is 1 day.</small></p>}
+        <List />
+      </div>
     </>
   )
 }
