@@ -1,8 +1,13 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.background {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  opacity: 0.25;
+}
+
+.content {
+  position: relative;
+  padding: 1rem;
 }
 
 @keyframes logo-spin {
@@ -16,17 +21,70 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .logo {
-    animation: logo-spin infinite 20s linear;
+    animation: logo-spin infinite 10s linear;
   }
 }
 
-.background {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  opacity: 0.25;
+table {
+  background-color: gray;
+  border-spacing: 1px;
+
+  td, th {
+    padding: 0.5rem 1rem;
+    text-align: left;
+    background-color: white;
+  }
+
+  tr.highlight td {
+    color: crimson;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  table {
+    td, th {
+      background-color: #1a1a1a;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  table {
+    display: none;
+  }
 }
 
-.content {
-  position: relative;
+.cars {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media screen and (max-width: 600px) {
+  .cars {
+    display: flex;
+  }
+}
+
+.car {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+
+  &.highlight {
+    color: crimson;
+  }
+}
+
+.car-name {
+  padding-bottom: 0.1rem;
+  border-bottom: 1px solid;
+}
+
+.car-name span {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.separator {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }

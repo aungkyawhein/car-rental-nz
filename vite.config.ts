@@ -13,7 +13,7 @@ export default defineConfig({
         name: 'Car Rental NZ',
         short_name: 'CarRent',
         description: 'Car rental price comparison',
-        theme_color: '#ffffff',
+        theme_color: '#242424',
         icons: [
           {
             src: 'pwa-64x64.png',

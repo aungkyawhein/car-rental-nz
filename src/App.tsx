@@ -110,45 +110,85 @@ function CarsList(props: {cars: Array<CarModel>, daily: boolean}) {
     })
   }, [cars, lowestIndex])
 
+  function Table() {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Car</th>
+            <th>Hourly Rate</th>
+            <th>Daily Rate (+6 hrs)</th>
+            <th>Distance Rate (per km)</th>
+            <th>Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+        {
+          cars.map((car, i) => {
+            return (
+              <tr key={i} className={lowestIndex === i ? 'highlight' : ''}>
+                <td>{car.name}</td>
+                <td>
+                  <span className={daily ? 'disabled' : 'active'}>
+                    $ {car.perHr}
+                  </span>
+                </td>
+                <td>
+                  <span className={daily ? 'active' : 'disabled'}>
+                    $ {car.perDay}
+                  </span>
+                </td>
+                <td>$ {car.perKm}</td>
+                <td>
+                  <span>
+                    $ {car.price}
+                  </span>
+                </td>
+              </tr>
+            )
+          })
+        }
+        </tbody>
+      </table>
+    )
+  }
+
+  function List() {
+    return (
+      <div className='cars'>
+        {
+          cars.map((car, i) => {
+            return (
+              <div key={i} className={lowestIndex === i ? 'car highlight' : 'car'}>
+                <div className='car-name'>
+                  <strong>{car.name}</strong>
+                  <span>
+                    ${car.price}
+                  </span>
+                </div>
+                <div>${car.perKm} / km</div>
+                <div>
+                  <span className={daily ? 'disabled' : 'active'}>
+                    ${car.perHr} / hr
+                  </span>
+                  <span className='separator'>|</span>
+                  <span className={daily ? 'active' : 'disabled'}>
+                    ${car.perDay} / day
+                  </span>
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+    )
+  }
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Car</th>
-          <th>Hourly Rate</th>
-          <th>Daily Rate (+6 hrs)</th>
-          <th>Distance Rate (per km)</th>
-          <th>Total Price</th>
-        </tr>
-      </thead>
-      <tbody>
-      {
-        cars.map((car, i) => {
-          return (
-            <tr key={i} className={lowestIndex === i ? 'highlight' : ''}>
-              <td>{car.name}</td>
-              <td>
-                <span className={daily ? 'disabled' : 'active'}>
-                  $ {car.perHr}
-                </span>
-              </td>
-              <td>
-                <span className={daily ? 'active' : 'disabled'}>
-                  $ {car.perDay}
-                </span>
-              </td>
-              <td>$ {car.perKm}</td>
-              <td>
-                <span>
-                  $ {car.price}
-                </span>
-              </td>
-            </tr>
-          )
-        })
-      }
-      </tbody>
-    </table>
+    <>
+      <Table />
+      <List />
+    </>
   )
 }
 

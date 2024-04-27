@@ -13,6 +13,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -20,14 +30,6 @@ a {
 }
 a:hover {
   color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -64,29 +66,6 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
-  }
-}
-
-table {
-  margin: 0 auto;
-  background-color: gray;
-  border-spacing: 1px;
-
-  td, th {
-    padding: 0.5rem 1rem;
-    text-align: left;
-    background-color: white;
-  }
-
-  tr.highlight td {
-    color: crimson;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  table {
-    td, th {
-      background-color: #1a1a1a;
-    }
   }
 }
 
