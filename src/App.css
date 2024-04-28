@@ -82,6 +82,10 @@ label {
 }
 
 .car-name {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding-bottom: 0.1rem;
   border-bottom: 1px solid;
 }
