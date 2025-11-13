@@ -19,27 +19,27 @@ function App() {
   const cityhop = [
     {
       name: 'YARIS',
-      perHr: 10.50,
-      perKm: 0.45,
-      perDay: 63,
+      perHr: 13.50,
+      perKm: 0.49,
+      perDay: 81
     },
     {
       name: 'COROLLA',
-      perHr: 12.50,
-      perKm: 0.45,
-      perDay: 75
+      perHr: 15.50,
+      perKm: 0.49,
+      perDay: 93
     },
     {
       name: 'RAV 4',
-      perHr: 13.75,
-      perKm: 0.45,
-      perDay: 82.50
+      perHr: 16.50,
+      perKm: 0.49,
+      perDay: 99
     },
     {
-      name: 'E-GOLF',
-      perHr: 20,
-      perKm: 0,
-      perDay: 120
+      name: 'Van',
+      perHr: 22,
+      perKm: 0.54,
+      perDay: 106
     },
   ]
   const calcPrice = (perHr: number, perKm: number) => {
